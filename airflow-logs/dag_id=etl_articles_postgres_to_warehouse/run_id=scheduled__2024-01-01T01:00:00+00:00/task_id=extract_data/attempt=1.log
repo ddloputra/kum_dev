@@ -1,0 +1,126 @@
+[2024-09-25T06:36:33.547+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-09-25T06:36:34.605+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [queued]>
+[2024-09-25T06:36:35.263+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [queued]>
+[2024-09-25T06:36:35.278+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-09-25T06:36:35.504+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data> on 2024-01-01 01:00:00+00:00
+[2024-09-25T06:36:35.607+0000] {standard_task_runner.py:72} INFO - Started process 588 to run task
+[2024-09-25T06:36:35.698+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_articles_postgres_to_warehouse', 'extract_data', 'scheduled__2024-01-01T01:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/etl_kum.py', '--cfg-path', '/tmp/tmphe3zj04j']
+[2024-09-25T06:36:36.220+0000] {standard_task_runner.py:105} INFO - Job 3: Subtask extract_data
+[2024-09-25T06:36:40.605+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [running]> on host ebcbdd76184c
+[2024-09-25T06:36:43.629+0000] {job.py:229} INFO - Heartbeat recovered after 12.37 seconds
+[2024-09-25T06:36:46.281+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_articles_postgres_to_warehouse' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-01T01:00:00+00:00'
+[2024-09-25T06:36:46.527+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-09-25T06:36:50.300+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/dags/etl_kum.py", line 26, in extract_data
+    src_conn = src_pg_hook.get_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 146, in get_conn
+    conn = deepcopy(self.connection or self.get_connection(conn_id))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `postgres_source` isn't defined
+[2024-09-25T06:39:50.737+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-09-25T06:39:52.503+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [queued]>
+[2024-09-25T06:39:53.103+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [queued]>
+[2024-09-25T06:39:53.327+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-09-25T06:39:55.919+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): extract_data> on 2024-01-01 01:00:00+00:00
+[2024-09-25T06:39:56.311+0000] {standard_task_runner.py:72} INFO - Started process 263 to run task
+[2024-09-25T06:39:56.913+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_articles_postgres_to_warehouse', 'extract_data', 'scheduled__2024-01-01T01:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/etl_kum.py', '--cfg-path', '/tmp/tmp59lbm3b_']
+[2024-09-25T06:39:57.408+0000] {standard_task_runner.py:105} INFO - Job 15: Subtask extract_data
+[2024-09-25T06:40:00.462+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_articles_postgres_to_warehouse.extract_data scheduled__2024-01-01T01:00:00+00:00 [running]> on host webserver
+[2024-09-25T06:40:02.209+0000] {job.py:229} INFO - Heartbeat recovered after 27.08 seconds
+[2024-09-25T06:40:02.968+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_articles_postgres_to_warehouse' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-01T01:00:00+00:00'
+[2024-09-25T06:40:03.009+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-09-25T06:40:03.460+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/dags/etl_kum.py", line 26, in extract_data
+    src_conn = src_pg_hook.get_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 146, in get_conn
+    conn = deepcopy(self.connection or self.get_connection(conn_id))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `postgres_source` isn't defined
+[2024-09-25T06:40:03.634+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_articles_postgres_to_warehouse, task_id=extract_data, run_id=scheduled__2024-01-01T01:00:00+00:00, execution_date=20240101T010000, start_date=20240925T063952, end_date=20240925T064003
+[2024-09-25T06:40:04.013+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-09-25T06:40:04.027+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 15 for task extract_data (The conn_id `postgres_source` isn't defined; 263)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/dags/etl_kum.py", line 26, in extract_data
+    src_conn = src_pg_hook.get_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/postgres/hooks/postgres.py", line 146, in get_conn
+    conn = deepcopy(self.connection or self.get_connection(conn_id))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `postgres_source` isn't defined
+[2024-09-25T06:40:04.240+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-09-25T06:40:04.716+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-09-25T06:40:04.741+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
