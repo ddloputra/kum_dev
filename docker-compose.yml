@@ -1,0 +1,68 @@
+version: "2.1"
+services:
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5434:5432"  # Expose Postgres on host's 5434 port, but use service name for inter-container communication
+    networks:
+      - airflow_network  # Add Postgres to the custom network
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ./scripts/airflow-entrypoint.sh
+    command: scheduler
+    restart: on-failure
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "8794:8793"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow-logs:/opt/airflow/logs
+      - ./scripts:/opt/airflow/scripts
+    networks:
+      - airflow_network  # Ensure scheduler is on the same network as Postgres
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 2
+
+  webserver:
+    hostname: webserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ./scripts/airflow-entrypoint.sh
+    command: webserver
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow-logs:/opt/airflow/logs
+      - ./scripts:/opt/airflow/scripts
+    ports:
+      - "8080:8080"
+    networks:
+      - airflow_network  # Ensure webserver is on the same network as Postgres
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 2
+
+networks:
+  airflow_network:
+    driver: bridge  # Create a bridge network for communication between services
